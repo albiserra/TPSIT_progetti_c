@@ -8,8 +8,26 @@ typedef struct  node{
     struct  node* next;//indirizzo del nodo successivo
 }Node;
 
-void cancellaNodo(){
+int contaElementi(Node* l){
+    int cont=0;
+    while (l!=NULL)
+    {
+        cont++;
+        l=l->next;
+    }
+    return cont;
+}
 
+void cancellaNodo(Node *l){
+    Node *head = l;
+    if(contaElementi(l)>5){
+        for(int k=0; k<5; k++){
+            l=l->next;
+        }
+        free(l->next);
+        l->next = NULL;
+    }
+    l = head;
 }
 
 void inserimento(Node **head, Node *element){
@@ -83,7 +101,7 @@ int  main()
             elem->next=NULL;
 
             inserimento(&lista,elem);
-            cancellaNodo();
+            cancellaNodo(lista);
         }
         
     } while (n>=0);
